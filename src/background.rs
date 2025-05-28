@@ -29,6 +29,7 @@ impl Default for Background {
     }
 }
 
+/// Read svg string from the path into an Rgba image
 fn read_svg_to_image(path: &Path) -> Result<Image, Error> {
     let mut opt = usvg::Options {
         // Get file's absolute directory.
