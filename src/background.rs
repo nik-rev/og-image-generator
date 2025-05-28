@@ -1,5 +1,6 @@
 //! Background of an OG image
 
+use crate::Image;
 use std::{
     fs, io,
     path::{Path, PathBuf},
@@ -21,6 +22,13 @@ pub enum Background {
     Fill(Rgba<u8>),
 }
 
+impl Default for Background {
+    /// The default background is white
+    fn default() -> Self {
+        Self::Fill(Rgba([255, 255, 255, 255]))
+    }
+}
+
 /// Failed to get the background
 #[derive(Debug, Error)]
 pub enum Error {
@@ -39,15 +47,14 @@ pub enum Error {
     /// Conversion of Svg into Image failed
     #[error("Failed to convert SVG into an Image")]
     SvgIntoImage,
+    /// Creation of Pixmap failed
+    #[error("Failed to create the Pixmap")]
+    CreatePixmap,
 }
 
 impl Background {
     /// Get the image corresponding to this background
-    pub fn image(
-        &self,
-        width: u32,
-        height: u32,
-    ) -> Result<image::ImageBuffer<Rgba<u8>, Vec<u8>>, Error> {
+    pub fn image(&self, width: u32, height: u32) -> Result<Image, Error> {
         match self {
             Self::Fill(rgb) => RgbaImage::from_pixel(width, height, *rgb),
             Self::Image(path) => ImageReader::open(path)
@@ -71,8 +78,8 @@ impl Background {
                     .map_err(Error::ParseSvg)?;
 
                 let pixmap_size = tree.size().to_int_size();
-                let mut pixmap =
-                    tiny_skia::Pixmap::new(pixmap_size.width(), pixmap_size.height()).unwrap();
+                let mut pixmap = tiny_skia::Pixmap::new(pixmap_size.width(), pixmap_size.height())
+                    .ok_or(Error::CreatePixmap)?;
                 resvg::render(&tree, tiny_skia::Transform::default(), &mut pixmap.as_mut());
 
                 RgbaImage::from_raw(

@@ -1,16 +1,11 @@
 //! OG image generator
 
-mod background;
-
 use std::path::Path;
 
-use background::Background;
-
-const WIDTH: u32 = 1280;
-const HEIGHT: u32 = 675;
+use og_image_generator::Background;
 
 fn create(bg: &Background) -> Result<(), Box<dyn std::error::Error>> {
-    let img = bg.image(WIDTH, HEIGHT)?;
+    let img = bg.image(1280, 675)?;
 
     img.save(Path::new("output.png"))?;
 
