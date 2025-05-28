@@ -29,7 +29,7 @@ impl Default for Background {
     }
 }
 
-fn svg_to_image(path: &Path) -> Result<Image, Error> {
+fn read_svg_to_image(path: &Path) -> Result<Image, Error> {
     let mut opt = usvg::Options {
         // Get file's absolute directory.
         resources_dir: fs::canonicalize(path)
@@ -71,7 +71,7 @@ impl Background {
                 .decode()
                 .map_err(Error::DecodeBackgroundImage)?
                 .into(),
-            Self::Svg(path) => svg_to_image(path)?,
+            Self::Svg(path) => read_svg_to_image(path)?,
         }
         .pipe(|mut image| {
             image::imageops::crop(&mut image, 0, 0, width, height);
