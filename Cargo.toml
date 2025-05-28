@@ -1,0 +1,24 @@
+[package]
+name = "og-image-generator"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+image = "0.25.6"
+imageproc = "0.25.0"
+resvg = "0.45.1"
+tap = "1.0.1"
+
+[lints.rust]
+missing_docs = "warn"
+unused_qualifications = "warn"
+
+[lints.clippy]
+pedantic = { priority = -1, level = "warn" }
+nursery = { priority = -1, level = "warn" }
+# use Trait; => use Trait as _;
+unused_trait_names = "warn"
+# if we need it const, make it const. no need to make everything that can be const, const
+missing_const_for_fn = "allow"
+# arbitrary limit imposes unnecessary restriction and can make code harder to follow
+too_many_lines = "allow"
