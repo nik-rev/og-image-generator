@@ -3,6 +3,9 @@
 /// Error trying to create the OG Image
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
+    /// An error occured in the layout
+    #[error("Error computing layout: {0}")]
+    Layout(#[from] taffy::TaffyError),
     /// Font for title is not valid
     #[error(transparent)]
     InvalidTitleFont(InvalidFont),

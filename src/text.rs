@@ -15,10 +15,6 @@ pub struct Text<'font> {
     pub color: Color,
     /// Size of the text
     pub size: u32,
-    /// x-coordinate of the top left corner of the text
-    pub x: i32,
-    /// y-coordinate of the top left corner of the text
-    pub y: i32,
     /// Bytes of the font
     ///
     /// Example:
@@ -41,12 +37,12 @@ impl fmt::Debug for Text<'_> {
 
 impl Text<'_> {
     /// Draw the text on the image
-    pub fn draw(self, img: &mut Image) -> Result<(), InvalidFont> {
+    pub fn draw(self, img: &mut Image, x: i32, y: i32) -> Result<(), InvalidFont> {
         draw_text_mut(
             img,
             self.color.into(),
-            self.x,
-            self.y,
+            x,
+            y,
             PxScale {
                 x: self.size as f32,
                 y: self.size as f32,
