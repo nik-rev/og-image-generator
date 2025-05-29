@@ -2139,7 +2139,6 @@ dependencies = [
  "blitz-traits",
  "clap",
  "image",
- "png",
  "tokio",
 ]
 
