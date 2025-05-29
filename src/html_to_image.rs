@@ -29,6 +29,8 @@ pub async fn html_to_image(
 
     let mut tera_cx = Context::new();
 
+    tera_cx.insert("height", &height);
+    tera_cx.insert("width", &width);
     for (key, value) in variables {
         tera_cx.insert(key, value);
     }

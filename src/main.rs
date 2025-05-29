@@ -21,11 +21,13 @@ struct Args {
     /// For example, `Monaspace-Regular.ttf` will be available as `"Monaspace-Regular"`
     ///
     /// Only `.ttf` extension is supported.
-    #[arg(long)]
+    #[arg(long, verbatim_doc_comment)]
     font: Option<PathBuf>,
     /// Variables of format `key=value` that will be available to use in the html.
     ///
     /// Each `key` can be used in the HTML as `{{ key }}` and will expand to `value`.
+    ///
+    /// `{{ height }}` and `{{ width }}` is always available.
     #[arg(value_parser = |s: &str|
         s.split_once('=')
         .ok_or("expected `key=value`")
