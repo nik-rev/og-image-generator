@@ -1,37 +1,35 @@
-//! OG image generator
+//! Render OG image to HTML
 
-use std::path::Path;
+mod html_to_image;
+use std::{fs, path::PathBuf};
 
-use og_image_generator::{Background, Color, OgImage, Text};
+use clap::Parser as _;
 
-fn create(bg: Background) -> Result<(), Box<dyn std::error::Error>> {
-    let font = include_bytes!("../Literata-VariableFont.ttf");
-
-    let og = OgImage::builder()
-        .title(Text {
-            content: "This is a blog post".to_string(),
-            color: Color::gray(10),
-            size: 60,
-            font,
-        })
-        .background(bg)
-        .description(Text {
-            content: "This is a description".to_string(),
-            color: Color::gray(40),
-            size: 40,
-            font,
-        })
-        .build()
-        .create();
-
-    og?.save(Path::new("output.png"))?;
-
-    Ok(())
+#[derive(clap::Parser)]
+struct Args {
+    /// Path of the HTML file to render
+    input: PathBuf,
+    /// Path of the output image file. Can be any extension such as .png, .jpg, .webp or others
+    output: PathBuf,
+    /// Width of the produced image
+    #[arg(long, default_value_t = 1280)]
+    width: u32,
+    /// Height of the produced image
+    #[arg(long, default_value_t = 675)]
+    height: u32,
 }
 
-fn main() {
-    create(Background::Svg(
-        Path::new("default-template.svg").to_path_buf(),
-    ))
+#[tokio::main]
+async fn main() {
+    let args = Args::parse();
+
+    let output = html_to_image::html_to_image(
+        args.width,
+        args.height,
+        &fs::read_to_string(args.input).unwrap(),
+    )
+    .await
     .unwrap();
+
+    output.save(args.output).unwrap();
 }

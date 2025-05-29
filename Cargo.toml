@@ -4,14 +4,22 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-ab_glyph = "0.2.29"
-bon = "3.6.3"
+
+# --- HTML + CSS rendering
+anyrender = { git = "https://github.com/DioxusLabs/blitz", rev = "1bd80524c6229c7d5232613f4e6a4e76f8a61c2d" }
+anyrender_vello_cpu = { git = "https://github.com/DioxusLabs/blitz", rev = "1bd80524c6229c7d5232613f4e6a4e76f8a61c2d" }
+blitz-dom = { git = "https://github.com/DioxusLabs/blitz", rev = "1bd80524c6229c7d5232613f4e6a4e76f8a61c2d" }
+blitz-html = { git = "https://github.com/DioxusLabs/blitz", rev = "1bd80524c6229c7d5232613f4e6a4e76f8a61c2d" }
+blitz-net = { git = "https://github.com/DioxusLabs/blitz", rev = "1bd80524c6229c7d5232613f4e6a4e76f8a61c2d" }
+blitz-paint = { git = "https://github.com/DioxusLabs/blitz", rev = "1bd80524c6229c7d5232613f4e6a4e76f8a61c2d" }
+blitz-traits = { git = "https://github.com/DioxusLabs/blitz", rev = "1bd80524c6229c7d5232613f4e6a4e76f8a61c2d" }
+# ---
+
+tokio = { version = "1.45.1", features = ["full"] }
+
 image = "0.25.6"
-imageproc = "0.25.0"
-resvg = "0.45.1"
-taffy = "0.8.1"
-tap = "1.0.1"
-thiserror = "2.0.12"
+png = "0.17.16"
+clap = { version = "4.5.39", features = ["derive"] }
 
 [lints.rust]
 missing_docs = "warn"
@@ -22,6 +30,9 @@ unused_qualifications = "warn"
 [lints.clippy]
 pedantic = { priority = -1, level = "warn" }
 nursery = { priority = -1, level = "warn" }
+
+cast_sign_loss = "allow"
+future_not_send = "allow"
 missing_errors_doc = "allow"
 # use Trait; => use Trait as _;
 unused_trait_names = "warn"
