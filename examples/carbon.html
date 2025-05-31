@@ -1,0 +1,64 @@
+<style>
+  :root {
+    --background: #161616;
+    --foreground: #dddddd;
+    --background2: #131313;
+    --secondary: #999999;
+    --tertiary: #444444;
+  }
+  body {
+    background-color: var(--background);
+    font-family: "{{ font }}";
+    position: relative;
+  }
+  #circle1 {
+    position: absolute;
+    bottom: -50px;
+    right: 350px;
+    color: var(--background2);
+    z-index: -10;
+  }
+  #circle2 {
+    position: absolute;
+    top: -10px;
+    left: 450px;
+    color: var(--background2);
+    z-index: -10;
+  }
+  #title {
+    margin-left: 100px;
+    margin-top: 100px;
+    color: var(--foreground);
+    font-size: 80px;
+    margin-bottom: 60px;
+    max-width: 70%;
+  }
+  #description {
+    color: var(--secondary);
+    margin-left: 100px;
+    font-size: 45px;
+    max-width: 60%;
+  }
+  #date {
+    position: absolute;
+    color: var(--foreground);
+    font-size: 30px;
+    right: 100px;
+    bottom: 100px;
+  }
+</style>
+
+<svg id="circle1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle fill="currentColor" cx="50" cy="50" r="150" />
+</svg>
+<svg id="circle2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle fill="currentColor" cx="50" cy="50" r="110" />
+</svg>
+
+{% if title %}
+<p id="title">{{ title }}</p>
+{% endif %} {% if description %}
+<p id="description">{{ description }}</p>
+{% endif %} {% if date %}
+<p id="date">{{ date }}</p>
+{% endif %}

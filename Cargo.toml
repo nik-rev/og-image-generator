@@ -20,10 +20,16 @@ tokio = { version = "1.45.1", features = ["full"] }
 # Image rendering
 image = "0.25.6"
 # CLI argument parsing
-clap = { version = "4.5.39", features = ["derive"] }
+clap = { version = "4.5.39", features = [
+  "derive",
+  "wrap_help",
+  "unstable-markdown",
+] }
 tap = "1.0.1"
 fontique = "0.4.0"
 tera = { version = "1.20.0", default-features = false }
+anyhow = "1.0.98"
+anstyle = "1.0.10"
 
 [lints.rust]
 missing_docs = "warn"

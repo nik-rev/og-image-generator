@@ -1,3 +1,4 @@
+use anyhow::{Context as _, Result, anyhow};
 use anyrender::render_to_buffer;
 use anyrender_vello_cpu::VelloCpuImageRenderer;
 use blitz_dom::net::Resource;
@@ -15,14 +16,17 @@ use std::{
 };
 use tera::{Context, Tera};
 
+const CUSTOM_FONT_NAME: &str = "custom-font";
+
 pub async fn html_to_image(
     width: u32,
     height: u32,
     html_path: &Path,
     font_path: Option<&Path>,
     variables: &[(String, String)],
-) -> Option<RgbaImage> {
-    let html = &fs::read_to_string(html_path).unwrap();
+) -> Result<RgbaImage> {
+    let html = &fs::read_to_string(html_path)
+        .map_err(|err| anyhow!("Failed to read {html_path:?}: {err}"))?;
     let (mut recv, callback) = MpscCallback::new();
     let callback = Arc::new(callback);
     let net = Arc::new(Provider::new(callback));
@@ -31,10 +35,11 @@ pub async fn html_to_image(
 
     tera_cx.insert("height", &height);
     tera_cx.insert("width", &width);
+    tera_cx.insert("font", CUSTOM_FONT_NAME);
     for (key, value) in variables {
         tera_cx.insert(key, value);
     }
-    let html = Tera::default().render_str(html, &tera_cx).unwrap();
+    let html = Tera::default().render_str(html, &tera_cx)?;
 
     let mut html_document = HtmlDocument::from_html(
         &format!(
@@ -62,7 +67,9 @@ pub async fn html_to_image(
         // import things from the file system
         Some(format!(
             "file:///{}",
-            path::absolute(html_path).unwrap().to_str().unwrap()
+            path::absolute(html_path)?
+                .to_str()
+                .context("Invalid path")?
         )),
         Vec::new(),
         Arc::clone(&net) as SharedProvider<Resource>,
@@ -71,12 +78,13 @@ pub async fn html_to_image(
     );
 
     if let Some(font_path) = font_path {
-        let font = fs::read(font_path).unwrap();
+        let font =
+            fs::read(font_path).map_err(|err| anyhow!("Failed reading {font_path:?}: {err}"))?;
 
         html_document.font_ctx.collection.register_fonts(
             font.into(),
             Some(fontique::FontInfoOverride {
-                family_name: Some(font_path.file_stem().unwrap().to_str().unwrap()),
+                family_name: Some(CUSTOM_FONT_NAME),
                 width: None,
                 style: None,
                 weight: None,
@@ -117,5 +125,6 @@ pub async fn html_to_image(
         width,
         height,
     );
-    RgbaImage::from_vec(width, height, buf)
+
+    RgbaImage::from_vec(width, height, buf).ok_or_else(|| anyhow!("Could not create RgbaImage"))
 }
