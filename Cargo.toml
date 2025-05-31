@@ -1,7 +1,17 @@
 [package]
 name = "og-image-generator"
+repository = "https://github.com/nik-rev/og-image-generator"
+homepage = "https://github.com/nik-rev/og-image-generator"
+description = "Pain-free OpenGraph image generation using HTML and CSS for your blog"
+authors = ["Nik Revenco"]
 version = "0.1.0"
 edition = "2024"
+
+[package.metadata.wix]
+upgrade-guid = "81E8FB3D-416D-4C7A-830D-7FB59ED4F00B"
+path-guid = "45D98324-71EE-4BD0-A700-781512EDDE92"
+license = false
+eula = false
 
 [dependencies]
 
@@ -53,3 +63,8 @@ too_many_lines = "allow"
 
 cast_precision_loss = "allow"
 cast_possible_truncation = "allow"
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
