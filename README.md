@@ -10,4 +10,4 @@ It is distributed as **a single binary** and uses [blitz](https://github.com/Dio
 og-image-generator examples/carbon.html title="Announcing Rust 1.87 and ten years of Rust!" --font examples/Literata.ttf
 ```
 
-![carbon](./examples/carbon.png)
+<img src="examples/carbon.png" alt="carbon"></img>
