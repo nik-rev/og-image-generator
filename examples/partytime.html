@@ -1,0 +1,107 @@
+<style>
+  :root {
+    --background: #ffc0cb;
+    --foreground: #ffffff;
+    --accent: #ff69b4;
+    --glow: #ffffffaa;
+    --shadow: #ff1493;
+  }
+
+  body {
+    color: #bc13fe;
+    background-image: linear-gradient(
+      45deg,
+      #bc13fe,
+      #e025be,
+      #f0459a,
+      #fb697a,
+      #ff8e5f
+    );
+    background-color: var(--background);
+    font-family: "{{ font }}";
+    position: relative;
+  }
+
+  #sparkle1,
+  #sparkle2 {
+    position: absolute;
+    color: #ffffff;
+    z-index: -10;
+  }
+
+  #sparkle1 {
+    top: 20px;
+    left: 60px;
+    transform: rotate(15deg);
+  }
+
+  #sparkle2 {
+    bottom: 40px;
+    right: 80px;
+    transform: scale(1.2);
+  }
+
+  #title {
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--foreground);
+    font-size: 90px;
+    margin-bottom: 40px;
+    max-width: 70%;
+    text-shadow: 0 0 20px var(--shadow);
+  }
+
+  #description {
+    color: #ffdbfb;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 50px;
+    font-style: italic;
+    max-width: 60%;
+    text-shadow: 0 0 10px var(--shadow);
+  }
+
+  #date {
+    position: absolute;
+    color: var(--foreground);
+    font-size: 32px;
+    right: 100px;
+    bottom: 80px;
+    text-shadow: 0 0 8px var(--glow);
+  }
+</style>
+
+<svg
+  id="sparkle1"
+  viewBox="0 0 100 100"
+  width="120"
+  height="120"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <polygon
+    fill="currentColor"
+    points="50,0 60,40 100,50 60,60 50,100 40,60 0,50 40,40"
+  />
+</svg>
+
+<svg
+  id="sparkle2"
+  viewBox="0 0 100 100"
+  width="80"
+  height="80"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <polygon
+    fill="currentColor"
+    points="50,0 60,40 100,50 60,60 50,100 40,60 0,50 40,40"
+  />
+</svg>
+
+{% if title %}
+<p id="title" class="text-gradient">{{ title }}</p>
+{% endif %} {% if description %}
+<p id="description">{{ description }}</p>
+{% endif %} {% if date %}
+<p id="date">{{ date }}</p>
+{% endif %}

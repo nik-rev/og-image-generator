@@ -7,7 +7,13 @@ It is distributed as **a single binary** and uses [blitz](https://github.com/Dio
 ## Examples
 
 ```sh
-og-image-generator examples/carbon.html title="Announcing Rust 1.87 and ten years of Rust!" --font examples/Literata.ttf
+og-image-generator examples/carbon.html title="Announcing og-image-generator" description="A command-line tool that generates OpenGraph images from HTML and CSS" --font examples/Literata.ttf
 ```
 
 <img src="examples/carbon.png" alt="carbon"></img>
+
+```sh
+og-image-generator examples/partytime.html title="Announcing og-image-generator" description="A command-line tool that generates OpenGraph images from HTML and CSS" --font examples/HappyMonkey.ttf
+```
+
+<img src="examples/partytime.png" alt="partytime"></img>
