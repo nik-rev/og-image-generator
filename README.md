@@ -31,3 +31,27 @@ og-image-generator examples/partytime.html title="Announcing og-image-generator"
 Output:
 
 <img src="examples/partytime.png" alt="partytime"></img>
+
+## Installation
+
+### Homebrew
+
+```sh
+brew install nik-rev/tap/og-image-generator
+```
+
+### PowerShell
+
+```sh
+powershell -ExecutionPolicy Bypass -c "irm https://github.com/nik-rev/og-image-generator/releases/latest/download/og-image-generator-installer.ps1 | iex"
+```
+
+### Shell
+
+```sh
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/nik-rev/og-image-generator/releases/latest/download/og-image-generator-installer.sh | sh
+```
+
+### Nix
+
+We have a `flake.nix`, so you can build from source with `cargo build`
