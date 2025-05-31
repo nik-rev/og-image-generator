@@ -1,7 +1,6 @@
 use std::path::PathBuf;
 
 use anstyle::{AnsiColor, Effects};
-use clap::ValueEnum;
 
 /// Styles for the CLI
 const STYLES: clap::builder::Styles = clap::builder::Styles::styled()
@@ -12,13 +11,6 @@ const STYLES: clap::builder::Styles = clap::builder::Styles::styled()
     .error(AnsiColor::BrightRed.on_default().effects(Effects::BOLD))
     .valid(AnsiColor::BrightCyan.on_default().effects(Effects::BOLD))
     .invalid(AnsiColor::BrightYellow.on_default().effects(Effects::BOLD));
-
-#[derive(ValueEnum, Clone, Copy)]
-pub enum Template {
-    Carbon,
-    Catppuccin,
-    Sunflower,
-}
 
 /// Generate Open Graph images from HTML and CSS
 #[derive(clap::Parser)]
@@ -55,12 +47,4 @@ pub struct Args {
         .map(|(s1, s2)| (s1.to_string(), s2.to_string())
     ))]
     pub variables: Vec<(String, String)>,
-    /// Generate using a pre-defined template
-    ///
-    /// Pre-defined templates make use of the following variables (all optional):
-    /// - `{{ title }}`
-    /// - `{{ description }}`
-    /// - `{{ date }}`
-    #[arg(long, conflicts_with = "input")]
-    pub template: Option<Template>,
 }
