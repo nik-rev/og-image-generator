@@ -67,4 +67,5 @@ cast_possible_truncation = "allow"
 # The profile that 'dist' will build with
 [profile.dist]
 inherits = "release"
-lto = "thin"
+codegen-units = 1
+lto = true
