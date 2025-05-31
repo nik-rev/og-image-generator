@@ -16,7 +16,7 @@ Source file: [carbon.html](./examples/carbon.html)
 og-image-generator examples/carbon.html title="Announcing og-image-generator" description="A command-line tool that generates OpenGraph images from HTML and CSS" --font examples/Literata.ttf
 ```
 
-Output
+Output:
 
 <img src="examples/carbon.png" alt="carbon"></img>
 
