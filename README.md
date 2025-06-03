@@ -22,7 +22,7 @@ The [exact templating syntax](https://keats.github.io/tera/) is described in the
 Source file: [carbon.html](./examples/carbon.html)
 
 ```sh
-og-image-generator single examples/carbon.html title="Announcing og-image-generator" description="A command-line tool that generates OpenGraph images from HTML and CSS" --font examples/Literata.ttf
+og-image-generator single examples/carbon.html title="Announcing og-image-generator" output.png description="A command-line tool that generates OpenGraph images from HTML and CSS" --font examples/Literata.ttf
 ```
 
 Output:
@@ -34,7 +34,7 @@ Output:
 Source file: [partytime.html](./examples/partytime.html)
 
 ```sh
-og-image-generator single examples/partytime.html title="Announcing og-image-generator" description="A command-line tool that generates OpenGraph images from HTML and CSS" --font examples/HappyMonkey.ttf
+og-image-generator single examples/partytime.html title="Announcing og-image-generator" output.png description="A command-line tool that generates OpenGraph images from HTML and CSS" --font examples/HappyMonkey.ttf
 ```
 
 Output:
