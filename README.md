@@ -15,6 +15,8 @@ More information about them is found in the `--help` menu.
 
 Examples of generated open graph images
 
+The [exact templating syntax](https://keats.github.io/tera/) is described in the Tera documentation.
+
 ### Carbon
 
 Source file: [carbon.html](./examples/carbon.html)
