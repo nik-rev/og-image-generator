@@ -4,7 +4,7 @@ repository = "https://github.com/nik-rev/og-image-generator"
 homepage = "https://github.com/nik-rev/og-image-generator"
 description = "Pain-free OpenGraph image generation using HTML and CSS for your blog"
 authors = ["Nik Revenco"]
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 
 [package.metadata.wix]
